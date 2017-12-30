@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://bulma.io/css/bulma-docs.css?v=201712281510">
+    <style>
+        body {
+            padding-top: 40px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="root" class="container">
+    <tabs>
+        <tab name="About us" :selected="true">
+            <h1>Here is a content for about us tab</h1>
+        </tab>
+
+        <tab name="About our culture">
+            <h1>About our culture tab</h1>
+        </tab>
+
+        <tab name="About our vision">
+            <h1>About our vision tab</h1>
+        </tab>
+    </tabs>
+    <div class="tab-panels">
+    </div>
+</div>
+
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+
+    <script>
+
+        Vue.component('tabs', {
+            template: `
+            <div>
+                <div class="tabs">
+                  <ul>
+                    <li class="is-active"><a>Pictures</a></li>
+                    <li><a>Music</a></li>
+                    <li><a>Videos</a></li>
+                    <li><a>Documents</a></li>
+                  </ul>
+                </div>
+
+                <div class="tabs-details">
+                    <slot></slot>
+                </div>
+            </div>
+            `,
+            mounted() {
+                console.log(this.$children);
+            }
+        });
+
+        Vue.component('tab', {
+            template: `
+                <div><slot></slot></div>
+            `
+        });
+
+        var app = new Vue({
+            el: '#root',
+            data: {
+            }
+        })
+    </script>
+</body>
+</html>
