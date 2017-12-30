@@ -7,19 +7,38 @@
 <body>
 
 <div id="root">
-    <input type="text" id="input" v-model="message">
+    <ul>
+        <!--<li v-for="name in names">
+            {{ name }}
+        </li>-->
 
-    <p> The value of input is {{ message }}</p>
+        <li v-for="name in names" v-text="name">
+            {{ name }}
+        </li>
+    </ul>
+
+    <!--<input type="text" v-model="newName" v-on:keyUp="addName">-->
+    <input type="text" v-model="newName">
+    <!--<button v-on:click="addName">Add name</button>-->
+    <button @click="addName">Add name</button>
 </div>
 
     <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
 
     <script>
-        new Vue({
+        var app = new Vue({
             el: '#root',
             data: {
-                message: 'Hello world!'
-            }
+                newName: '',
+                names: ['Joe', 'Mary', 'Jane', 'Jack']
+            },
+            methods: {
+                addName() {
+                    this.names.push(this.newName);
+                    this.newName = '';
+
+                }
+            },
         })
     </script>
 </body>
