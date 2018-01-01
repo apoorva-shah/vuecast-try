@@ -1,0 +1,49 @@
+<!--https://laracasts.com/series/learn-vue-2-step-by-step/episodes/13-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root">
+    <coupon @applied="onCouponApplied"></coupon>
+
+    <h1 v-if="couponApplied">You used a coupon!</h1>
+</div>
+
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+
+    <script>
+        window.Event = new Vue();
+
+        Vue.component('coupon', {
+            template: `<input placeholder="Enter your coupon code" @blur="onCouponApplied">`,
+            methods: {
+                onCouponApplied() {
+                    Event.$emit('applied');
+                }
+            }
+        });
+
+        var app = new Vue({
+            el: '#root',
+            data: {
+                couponApplied: false
+            },
+
+            created() {
+                Event.$on('applied', () => alert('handling it'));
+            }
+            /*methods: {
+                onCouponApplied() {
+                    this.couponApplied = true;
+                }
+            }*/
+        });
+
+
+    </script>
+</body>
+</html>
